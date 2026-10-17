@@ -1,10 +1,10 @@
 /**
- * @description Invocable action that cleans every restricted picklist and multi-select picklist on a record so
- * the record can be inserted, e.g. when cloning. Values that are inactive (and, when the record has a
+ * @description Invocable action that cleans every picklist and multi-select picklist on a record, restricted or
+ * not, so the record can be inserted, e.g. when cloning. Values that are inactive (and, when the record has a
  * RecordTypeId, unavailable for its record type) are removed. Uses the lookups in RemoveInactiveValuesSingleField.
  *
- * Only fields retrieved on the record are cleaned. In Get Records, retrieve the picklist fields you want
- * cleaned and RecordTypeId; without RecordTypeId only inactive values are removed. To filter for a record type
+ * Only fields retrieved on the record are cleaned, and Field API Names can narrow that further. In Get Records,
+ * retrieve the picklist fields you want cleaned and RecordTypeId; without RecordTypeId only inactive values are removed. To filter for a record type
  * other than the record's own (e.g. the clone gets a different one), set Record Type Id on the action.
  *
  * Usage in Flow: add the "Remove Inactive Picklist Values - All Fields" action with Record = {!Get_Original_Case}, then
@@ -17,10 +17,6 @@ public with sharing class RemoveInactiveValuesAllFields {
         Schema.DisplayType.MULTIPICKLIST
     };
 
-    // Lowercase object.field names tests treat as restricted; standard picklists are never restricted
-    @TestVisible
-    private static Set<String> restrictedFieldsForTest = new Set<String>();
-
     private static Map<String, Map<String, Schema.SObjectField>> fieldsByObject = new Map<String, Map<String, Schema.SObjectField>>();
 
     /**
@@ -30,7 +26,7 @@ public with sharing class RemoveInactiveValuesAllFields {
      */
     @InvocableMethod(
         label='Remove Inactive Picklist Values - All Fields'
-        description='Returns a copy of the record with inactive values removed from all of its restricted picklist fields.'
+        description='Returns a copy of the record with inactive values removed from all of its picklist fields.'
         category='Picklists'
     )
     public static List<Result> sanitize(List<Request> requests) {
@@ -59,7 +55,7 @@ public with sharing class RemoveInactiveValuesAllFields {
             if (!onlyFields.isEmpty() && !onlyFields.contains(fieldName.toLowerCase())) {
                 continue;
             }
-            if (!isRestrictedPicklist(objectName, fieldName) || populatedFields.get(fieldName) == null) {
+            if (!isPicklist(objectName, fieldName) || populatedFields.get(fieldName) == null) {
                 continue;
             }
 
@@ -82,11 +78,7 @@ public with sharing class RemoveInactiveValuesAllFields {
         return populatedFields.get('RecordTypeId') == null ? null : String.valueOf(populatedFields.get('RecordTypeId'));
     }
 
-    // Restricted only: unrestricted picklists accept any value on insert, so their data is left alone
-    private static Boolean isRestrictedPicklist(String objectName, String fieldName) {
-        if (restrictedFieldsForTest.contains((objectName + '.' + fieldName).toLowerCase())) {
-            return true;
-        }
+    private static Boolean isPicklist(String objectName, String fieldName) {
         if (!fieldsByObject.containsKey(objectName)) {
             fieldsByObject.put(objectName, Schema.describeSObjects(new List<String>{ objectName })[0].fields.getMap());
         }
@@ -95,18 +87,18 @@ public with sharing class RemoveInactiveValuesAllFields {
         if (field == null) {
             return false; // e.g. a parent relationship on the record
         }
-        Schema.DescribeFieldResult describe = field.getDescribe();
-        return PICKLIST_TYPES.contains(describe.getType()) && describe.isRestrictedPicklist();
+        return PICKLIST_TYPES.contains(field.getDescribe().getType());
     }
 
     // The record type lookup can lack a field (e.g. one the UI API doesn't expose); describe still works then
     private static Set<String> getAllowedValues(String objectName, String fieldName, String recordTypeId) {
+        if (String.isBlank(recordTypeId)) {
+            return RemoveInactiveValuesSingleField.getAllowedValues(objectName, fieldName, null);
+        }
+
         try {
             return RemoveInactiveValuesSingleField.getAllowedValues(objectName, fieldName, recordTypeId);
         } catch (RemoveInactiveValuesSingleField.InvalidInputException e) {
-            if (String.isBlank(recordTypeId)) {
-                throw e;
-            }
             return RemoveInactiveValuesSingleField.getAllowedValues(objectName, fieldName, null);
         }
     }
@@ -134,7 +126,7 @@ public with sharing class RemoveInactiveValuesAllFields {
         )
         public String recordTypeId;
 
-        @InvocableVariable(label='Field API Names' description='Optional. Only clean these fields. Blank cleans every restricted picklist retrieved on the record')
+        @InvocableVariable(label='Field API Names' description='Optional. Only clean these fields. Blank cleans every picklist retrieved on the record. Unrestricted picklists lose any value that is not active in the picklist, so limit this to the fields you want cleaned')
         public List<String> fieldApiNames;
     }
 

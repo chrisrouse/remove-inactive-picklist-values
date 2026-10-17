@@ -26,13 +26,13 @@ Output: **Active Value**. The remaining values, in their original order, or null
 
 ### Remove Inactive Picklist Values - All Fields
 
-Cleans every restricted picklist and multi-select picklist on a record in one step.
+Cleans every picklist and multi-select picklist on a record in one step, restricted or not.
 
 | Input | Required | Description |
 |---|---|---|
 | Record | Yes | The record to clean, e.g. the output of Get Records |
 | Record Type Id | No | Filters to this record type's values instead of the record's own `RecordTypeId` |
-| Field API Names | No | Only clean these fields. Blank cleans every restricted picklist on the record |
+| Field API Names | No | Only clean these fields. Blank cleans every picklist on the record |
 
 Outputs:
 - **Cleaned Record**: a copy of the record with the values removed. The input record is not modified.
@@ -40,7 +40,7 @@ Outputs:
 
 Notes:
 - Only fields retrieved on the record are cleaned. In Get Records, retrieve the picklist fields you want cleaned and `RecordTypeId`.
-- Unrestricted picklists are left alone, because they accept any value on insert.
+- Unrestricted picklists are cleaned too. Salesforce only exposes active values, so a value that isn't active in the picklist is removed, including a value that was never defined. Use Field API Names to limit the action to the fields you want cleaned.
 
 ## Record types
 
@@ -51,12 +51,12 @@ Without a Record Type Id, only inactive values are removed. With one, values tha
 
 ## Install
 
-This is a 2GP unlocked package with no namespace (version 1.0.1).
+This is a 2GP unlocked package with no namespace (version 1.1.0).
 
-- [Install in production or Developer Edition](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qE5JAAU)
-- [Install in a sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qE5JAAU)
+- [Install in production or Developer Edition](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qELRAA2)
+- [Install in a sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qELRAA2)
 
-Or with the CLI: `sf package install -p 04tbm000000qE5JAAU -o <org> --wait 20`
+Or with the CLI: `sf package install -p 04tbm000000qELRAA2 -o <org> --wait 20`
 
 Users who run the flow need access to the Apex classes `RemoveInactiveValuesSingleField` and `RemoveInactiveValuesAllFields`, either by profile at install time or through a permission set you assign.
 
