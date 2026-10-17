@@ -45,12 +45,12 @@ Without a Record Type Id, only inactive values are removed. With one, values tha
 
 ## Install
 
-This is a 2GP unlocked package with no namespace (version 1.0).
+This is a 2GP unlocked package with no namespace (version 1.0.1).
 
-- [Install in production or Developer Edition](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qDvdAAE)
-- [Install in a sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qDvdAAE)
+- [Install in production or Developer Edition](https://login.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qE5JAAU)
+- [Install in a sandbox](https://test.salesforce.com/packaging/installPackage.apexp?p0=04tbm000000qE5JAAU)
 
-Or with the CLI: `sf package install -p 04tbm000000qDvdAAE -o <org> --wait 20`
+Or with the CLI: `sf package install -p 04tbm000000qE5JAAU -o <org> --wait 20`
 
 Users who run the flow need access to the Apex classes `RemoveInactiveValuesSingleField` and `RemoveInactiveValuesAllFields`, either by profile at install time or through a permission set you assign.
 

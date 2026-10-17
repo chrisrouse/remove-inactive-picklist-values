@@ -1,8 +1,8 @@
 {
   "packageDirectories": [
     {
-      "versionName": "ver 1.0",
-      "versionNumber": "1.0.0.NEXT",
+      "versionName": "ver 1.0.1",
+      "versionNumber": "1.0.1.NEXT",
       "path": "force-app",
       "default": true,
       "package": "Remove Inactive Picklist Values",
@@ -15,6 +15,7 @@
   "sourceApiVersion": "67.0",
   "packageAliases": {
     "Remove Inactive Picklist Values": "0Hobm0000008WHFCA2",
-    "Remove Inactive Picklist Values@1.0.0-1": "04tbm000000qDvdAAE"
+    "Remove Inactive Picklist Values@1.0.0-1": "04tbm000000qDvdAAE",
+    "Remove Inactive Picklist Values@1.0.1-1": "04tbm000000qE5JAAU"
   }
 }
