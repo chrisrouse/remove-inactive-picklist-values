@@ -2,7 +2,7 @@
 
 Two Flow actions that remove inactive picklist values when you clone a record.
 
-A restricted picklist rejects inactive values on insert, and values that aren't available for the new record's record type are rejected too. A flow that copies a record from a Get Records element fails if the source record still holds one of those values. Pass the value (or the whole record) through one of these actions first and use the output on the clone.
+A restricted picklist rejects inactive values on insert, and values that aren't available for the new record's record type are rejected too. A flow that copies a record from a Get Records element fails if the source record still holds one of those values. Pass the value (or the whole record) through one of these actions first and use the output on the clone. These components provide two ways to clean up picklists or multi-select picklists. If you cleanup an unrestricted picklist, this will remove any value that is not an Active picklist value, so be careful with which fields you select.
 
 Both actions work for any object and field, support single and multi-select picklists, and are bulk safe.
 
@@ -21,6 +21,10 @@ Cleans one picklist or multi-select picklist value.
 
 Output: **Active Value**. The remaining values, in their original order, or null if none remain.
 
+Notes:
+- Only fields retrieved on the record are cleaned. In Get Records, retrieve the picklist fields you want cleaned and `RecordTypeId`.
+- Unrestricted picklists are cleaned too. Salesforce only exposes active values, so a value that isn't active in the picklist is removed, including a value that was never defined.
+
 <img width="507" height="577" alt="Screenshot 2026-10-17 at 9 47 02 AM" src="https://github.com/user-attachments/assets/1f9a87ee-8ae8-46ac-9ab0-9a1076e3c9ed" />
 
 
@@ -32,7 +36,7 @@ Cleans every picklist and multi-select picklist on a record in one step, restric
 |---|---|---|
 | Record | Yes | The record to clean, e.g. the output of Get Records |
 | Record Type Id | No | Filters to this record type's values instead of the record's own `RecordTypeId` |
-| Field API Names | No | Only clean these fields. Blank cleans every picklist on the record |
+| Field API Names | No | Only clean these fields. Blank cleans every picklist on the record . Comma-separated list. |
 
 Outputs:
 - **Cleaned Record**: a copy of the record with the values removed. The input record is not modified.
