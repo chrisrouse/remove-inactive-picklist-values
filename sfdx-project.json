@@ -6,7 +6,7 @@
       "path": "force-app",
       "default": true,
       "package": "Remove Inactive Picklist Values",
-      "versionDescription": "Remove inactive picklist values when cloning records."
+      "versionDescription": "Remove inactive picklist values when cloning records in a flow."
     }
   ],
   "name": "inactivePicklistValuesParser",
