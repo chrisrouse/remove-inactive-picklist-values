@@ -54,6 +54,13 @@ Or with the CLI: `sf package install -p 04tbm000000qE5JAAU -o <org> --wait 20`
 
 Users who run the flow need access to the Apex classes `RemoveInactiveValuesSingleField` and `RemoveInactiveValuesAllFields`, either by profile at install time or through a permission set you assign.
 
+## Installation Troubleshooting
+
+If the installation fails, it is likely due to an issue compiling Apex in your org. Expand the **Advanced Options** section and select *Compile only the Apex in the package*.
+
+<img width="904" height="172" alt="Screenshot 2026-10-17 at 9 35 17 AM" src="https://github.com/user-attachments/assets/cfe4cf83-affc-4c3f-b715-ff98ede14a8e" />
+
+
 ## Development
 
 ```
