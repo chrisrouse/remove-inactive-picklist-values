@@ -14,12 +14,15 @@ Cleans one picklist or multi-select picklist value.
 
 | Input | Required | Description |
 |---|---|---|
-| Object API Name | Yes | e.g. `Case` |
+| Object API Name | Yes | e.g. `Case`. |
 | Field API Name | Yes | e.g. `Status` |
 | Current Value | No | The value to clean. For a multi-select picklist, the semicolon-delimited string |
 | Record Type Id | No | Also removes values not available for this record type |
 
 Output: **Active Value**. The remaining values, in their original order, or null if none remain.
+
+<img width="507" height="577" alt="Screenshot 2026-10-17 at 9 47 02 AM" src="https://github.com/user-attachments/assets/1f9a87ee-8ae8-46ac-9ab0-9a1076e3c9ed" />
+
 
 ### Remove Inactive Picklist Values - All Fields
 
@@ -42,6 +45,9 @@ Notes:
 ## Record types
 
 Without a Record Type Id, only inactive values are removed. With one, values that aren't available for that record type are removed too. If the clone gets a different record type than the source, pass the **new** record type's Id.
+
+<img width="502" height="770" alt="Screenshot 2026-10-17 at 9 43 19 AM" src="https://github.com/user-attachments/assets/961be3a5-c1e2-4b1a-a89f-704978424a61" />
+
 
 ## Install
 
