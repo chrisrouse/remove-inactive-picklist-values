@@ -1,0 +1,19 @@
+{
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/.sf": true,
+    "**/.sfdx": true
+  },
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#0b5cab",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.border": "#0b5cab",
+    "statusBarItem.hoverBackground": "#3779ba",
+    "statusBarItem.remoteBackground": "#0f487f",
+    "statusBarItem.remoteForeground": "#ffffff",
+    "activityBar.activeBorder": "#0b5cab",
+    "activityBarBadge.background": "#0b5cab",
+    "activityBarBadge.foreground": "#ffffff"
+  }
+}

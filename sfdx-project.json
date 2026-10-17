@@ -1,0 +1,19 @@
+{
+  "packageDirectories": [
+    {
+      "versionName": "ver 1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "force-app",
+      "default": true,
+      "package": "Remove Inactive Picklist Values",
+      "versionDescription": "Remove inactive picklist values when cloning records."
+    }
+  ],
+  "name": "inactivePicklistValuesParser",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "67.0",
+  "packageAliases": {
+    "Remove Inactive Picklist Values": "0Hobm0000008WHFCA2"
+  }
+}
