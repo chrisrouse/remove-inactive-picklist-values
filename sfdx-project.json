@@ -14,6 +14,7 @@
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "67.0",
   "packageAliases": {
-    "Remove Inactive Picklist Values": "0Hobm0000008WHFCA2"
+    "Remove Inactive Picklist Values": "0Hobm0000008WHFCA2",
+    "Remove Inactive Picklist Values@1.0.0-1": "04tbm000000qDvdAAE"
   }
 }
