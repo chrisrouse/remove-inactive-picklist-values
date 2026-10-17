@@ -10,6 +10,8 @@ Both actions work for any object and field, support single and multi-select pick
 
 ### Remove Inactive Picklist Values - Single Field
 
+<img width="507" height="577" alt="Screenshot 2026-10-17 at 9 47 02 AM" src="https://github.com/user-attachments/assets/1f9a87ee-8ae8-46ac-9ab0-9a1076e3c9ed" />
+
 Cleans one picklist or multi-select picklist value.
 
 | Input | Required | Description |
@@ -25,10 +27,10 @@ Notes:
 - Only fields retrieved on the record are cleaned. In Get Records, retrieve the picklist fields you want cleaned and `RecordTypeId`.
 - Unrestricted picklists are cleaned too. Salesforce only exposes active values, so a value that isn't active in the picklist is removed, including a value that was never defined.
 
-<img width="507" height="577" alt="Screenshot 2026-10-17 at 9 47 02 AM" src="https://github.com/user-attachments/assets/1f9a87ee-8ae8-46ac-9ab0-9a1076e3c9ed" />
-
 
 ### Remove Inactive Picklist Values - All Fields
+
+<img width="502" height="770" alt="Screenshot 2026-10-17 at 9 43 19 AM" src="https://github.com/user-attachments/assets/961be3a5-c1e2-4b1a-a89f-704978424a61" />
 
 Cleans every picklist and multi-select picklist on a record in one step, restricted or not.
 
@@ -49,9 +51,6 @@ Notes:
 ## Record types
 
 Without a Record Type Id, only inactive values are removed. With one, values that aren't available for that record type are removed too. If the clone gets a different record type than the source, pass the **new** record type's Id.
-
-<img width="502" height="770" alt="Screenshot 2026-10-17 at 9 43 19 AM" src="https://github.com/user-attachments/assets/961be3a5-c1e2-4b1a-a89f-704978424a61" />
-
 
 ## Install
 
